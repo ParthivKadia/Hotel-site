@@ -103,7 +103,7 @@ export default function Navbar() {
 
       {/* MOBILE MENU — rich warm dark bg with amber tint */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-[#1a1208] px-8 pt-24 pb-10 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col bg-[#1a1208] px-8 pt-24 pb-1 transition-all duration-300 md:hidden ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
