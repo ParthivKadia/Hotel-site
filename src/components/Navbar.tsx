@@ -29,11 +29,15 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12 md:py-7">
 
-        {/* BRAND */}
+        {/* BRAND — force amber-100 when menu open so it shows over stone-900 overlay */}
         <Link
           to="/"
-          className={`font-serif text-xl tracking-[0.25em] uppercase transition-colors ${
-            solid ? 'text-stone-800' : 'text-amber-50'
+          className={`font-serif text-xl tracking-[0.25em] uppercase transition-colors relative z-50 ${
+            menuOpen
+              ? 'text-amber-100'
+              : solid
+              ? 'text-stone-800'
+              : 'text-amber-50'
           }`}
         >
           Raj Mahal
@@ -76,7 +80,7 @@ export default function Navbar() {
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           className={`relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden ${
-            solid ? 'text-stone-800' : 'text-amber-50'
+            menuOpen ? 'text-amber-100' : solid ? 'text-stone-800' : 'text-amber-50'
           }`}
         >
           <span
@@ -97,19 +101,25 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU — rich warm dark bg with amber tint */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-gradient-to-b from-amber-50 to-orange-100 px-10 pt-28 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col bg-[#1a1208] px-8 pt-24 pb-10 transition-all duration-300 md:hidden ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <ul className="flex flex-col gap-8">
+        {/* top amber accent line */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-amber-700 opacity-60" />
+
+        {/* decorative divider */}
+        <div className="mb-8 h-px w-8 bg-amber-800" />
+
+        <ul className="flex flex-col gap-6">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={`/${link.href}`}
                 onClick={() => setMenuOpen(false)}
-                className="font-serif text-3xl tracking-[0.08em] text-stone-800 hover:text-amber-700"
+                className="font-serif text-3xl tracking-[0.08em] uppercase text-amber-100 hover:text-amber-400 transition-colors"
               >
                 {link.label}
               </a>
@@ -117,10 +127,13 @@ export default function Navbar() {
           ))}
         </ul>
 
+        {/* subtle separator */}
+        <div className="mt-10 mb-0 h-px w-full bg-amber-900/40" />
+
         <Link
           to="/booking"
           onClick={() => setMenuOpen(false)}
-          className="mt-12 inline-block w-fit border border-stone-800 px-8 py-3 font-serif text-sm tracking-[0.15em] uppercase text-stone-800 hover:bg-stone-800 hover:text-amber-50"
+          className="mt-8 inline-block w-fit border border-amber-600 px-8 py-3 font-serif text-sm tracking-[0.15em] uppercase text-amber-100 bg-amber-900/30 hover:bg-amber-700 hover:text-stone-900 transition-all"
         >
           Reserve a Stay
         </Link>
